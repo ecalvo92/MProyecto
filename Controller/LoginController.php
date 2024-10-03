@@ -1,9 +1,15 @@
 <?php
+    include_once '../../Model/LoginModel.php';
+?>
+
+<?php
 
     if(isset($_POST["btnIniciarSesion"]))
     {
         $correo = $_POST["txtCorreo"];
         $contrasenna = $_POST["txtContrasenna"];
+
+        IniciarSesion($correo, $contrasenna);
     }
 
     if(isset($_POST["btnRegistrarUsuario"]))
