@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SeoDash Free Bootstrap Admin Template by Adminmart</title>
     <link rel="shortcut icon" type="image/png" href="images/seodashlogo.png" />
-    <link rel="stylesheet" href="css/styles.min.css" />
+    <link rel="stylesheet" href="../css/styles.min.css" />
 </head>
 
 <body>
@@ -25,7 +25,7 @@
                         <div class="card mb-0">
                             <div class="card-body">
                                 <a href="home.php" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                    <img src="images/logo-light.svg" alt="">
+                                    <img src="../images/logo-light.svg" alt="">
                                 </a>
 
                                 <p class="text-center">Recuperar el acceso</p>
