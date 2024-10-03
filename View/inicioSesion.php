@@ -28,7 +28,7 @@
                                     <img src="images/logo-light.svg" alt="">
                                 </a>
 
-                                <p class="text-center">Registro de usuarios</p>
+                                <p class="text-center">Inicio de sesión</p>
 
                                 <form action="" method="POST">
 
