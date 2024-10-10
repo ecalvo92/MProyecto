@@ -1,15 +1,12 @@
 <?php
     include_once '../../Model/LoginModel.php';
-?>
-
-<?php
 
     if(isset($_POST["btnIniciarSesion"]))
     {
         $correo = $_POST["txtCorreo"];
         $contrasenna = $_POST["txtContrasenna"];
 
-        IniciarSesion($correo, $contrasenna);
+        IniciarSesionModel($correo, $contrasenna);
     }
 
     if(isset($_POST["btnRegistrarUsuario"]))
@@ -18,11 +15,15 @@
         $nombre = $_POST["txtNombre"];
         $correo = $_POST["txtCorreo"];
         $contrasenna = $_POST["txtContrasenna"];
+
+        RegistrarUsuarioModel($identificacion,$nombre,$correo,$contrasenna);
     }
 
     if(isset($_POST["btnRecuperarAcceso"]))
     {
         $correo = $_POST["txtCorreo"];
+
+        RecuperarAccesoModel($correo);
     }
 
 ?>
