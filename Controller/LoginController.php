@@ -16,7 +16,16 @@
         $correo = $_POST["txtCorreo"];
         $contrasenna = $_POST["txtContrasenna"];
 
-        RegistrarUsuarioModel($identificacion,$nombre,$correo,$contrasenna);
+        $resultado = RegistrarUsuarioModel($identificacion,$nombre,$correo,$contrasenna);
+
+        if($resultado == true)
+        {
+            header('location: ../Login/inicioSesion.php');
+        }
+        else
+        {
+            $_POST["txtMensaje"] = "Su información no se ha registrado correctamente";
+        }
     }
 
     if(isset($_POST["btnRecuperarAcceso"]))

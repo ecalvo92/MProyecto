@@ -11,6 +11,7 @@
     <title>SeoDash Free Bootstrap Admin Template by Adminmart</title>
     <link rel="shortcut icon" type="image/png" href="images/seodashlogo.png" />
     <link rel="stylesheet" href="../css/styles.min.css" />
+    <link rel="stylesheet" href="../css/sistema.css" />
 </head>
 
 <body>
@@ -29,6 +30,13 @@
                                 </a>
 
                                 <p class="text-center">Registro de usuarios</p>
+
+                                <?php
+                                    if(isset($_POST["txtMensaje"]))
+                                    {
+                                        echo '<div class="alert alert-info Centrado">' . $_POST["txtMensaje"] . '</div>';
+                                    }
+                                ?>
 
                                 <form action="" method="POST">
 

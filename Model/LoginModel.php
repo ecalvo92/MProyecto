@@ -12,11 +12,20 @@
 
     function RegistrarUsuarioModel($identificacion,$nombre,$correo,$contrasenna)
     {
-        $enlace = AbrirBD();
+        try
+        {
+            $enlace = AbrirBD();
 
-        //Ejecutar el procedimiento almacenado
+            $sentencia = "CALL RegistrarUsuario('$identificacion','$nombre','$correo','$contrasenna')";
+            $resultado = $enlace -> query($sentencia);
 
-        CerrarBD($enlace);
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return false;
+        }
     }
 
     function RecuperarAccesoModel($correo)
