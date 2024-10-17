@@ -3,11 +3,20 @@
 
     function IniciarSesionModel($correo, $contrasenna)
     {
-        $enlace = AbrirBD();
+        try
+        {
+            $enlace = AbrirBD();
 
-        //Ejecutar el procedimiento almacenado
+            $sentencia = "CALL IniciarSesion('$correo','$contrasenna')";
+            $resultado = $enlace -> query($sentencia);
 
-        CerrarBD($enlace);
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return null;
+        }
     }
 
     function RegistrarUsuarioModel($identificacion,$nombre,$correo,$contrasenna)

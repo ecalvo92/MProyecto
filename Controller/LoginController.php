@@ -1,12 +1,29 @@
 <?php
     include_once '../../Model/LoginModel.php';
 
+    if(session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
     if(isset($_POST["btnIniciarSesion"]))
     {
         $correo = $_POST["txtCorreo"];
         $contrasenna = $_POST["txtContrasenna"];
 
-        IniciarSesionModel($correo, $contrasenna);
+        $resultado = IniciarSesionModel($correo, $contrasenna);
+
+        if($resultado != null && $resultado -> num_rows > 0)
+        {
+            $datos = mysqli_fetch_array($resultado);
+            $_SESSION["NombreUsuario"] = $datos["Nombre"];
+
+            header('location: ../home.php');
+        }
+        else
+        {
+            session_destroy();
+            $_POST["txtMensaje"] = "Su información no se ha validado correctamente";
+        }
     }
 
     if(isset($_POST["btnRegistrarUsuario"]))

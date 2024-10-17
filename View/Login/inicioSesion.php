@@ -30,6 +30,13 @@
 
                                 <p class="text-center">Inicio de sesión</p>
 
+                                <?php
+                                    if(isset($_POST["txtMensaje"]))
+                                    {
+                                        echo '<div class="alert alert-info Centrado">' . $_POST["txtMensaje"] . '</div>';
+                                    }
+                                ?>
+
                                 <form action="" method="POST">
 
                                     <div class="mb-3">
