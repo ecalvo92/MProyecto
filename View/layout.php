@@ -1,4 +1,5 @@
 <?php
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Controller/LoginController.php';
 
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -111,12 +112,14 @@
 
                                         if(isset($_SESSION["NombreUsuario"]))
                                         {
-                                            echo '<a href="Login/inicioSesion.php"
-                                                    class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar Sesión</a>';
+                                            echo '<form action="" method="POST">
+                                                    <button type="submit" style="width:150px" id="btnCerrarSesion" name="btnCerrarSesion"
+                                                    class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar Sesión</button>
+                                                  </form>';
                                         }
                                         else
                                         {
-                                            echo '<a href="Login/inicioSesion.php"
+                                            echo '<a href="Login/inicioSesion.php" style="width:150px"
                                                     class="btn btn-outline-primary mx-3 mt-2 d-block">Iniciar Sesión</a>';
                                         }
                                         

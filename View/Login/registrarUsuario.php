@@ -1,5 +1,5 @@
 <?php
-    include_once '../../Controller/LoginController.php';
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Controller/LoginController.php';
 ?>
 
 <!doctype html>

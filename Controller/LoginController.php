@@ -1,5 +1,5 @@
 <?php
-    include_once '../../Model/LoginModel.php';
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Model/LoginModel.php';
 
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -17,13 +17,19 @@
             $datos = mysqli_fetch_array($resultado);
             $_SESSION["NombreUsuario"] = $datos["Nombre"];
 
-            header('location: ../home.php');
+            header('location: ' . $_SERVER["DOCUMENT_ROOT"] . 'View/home.php');
         }
         else
         {
             session_destroy();
             $_POST["txtMensaje"] = "Su información no se ha validado correctamente";
         }
+    }
+
+    if(isset($_POST["btnCerrarSesion"]))
+    {
+        session_destroy();
+        header('location: ' . $_SERVER["DOCUMENT_ROOT"] . '/View/home.php');
     }
 
     if(isset($_POST["btnRegistrarUsuario"]))
@@ -37,7 +43,7 @@
 
         if($resultado == true)
         {
-            header('location: ../Login/inicioSesion.php');
+            header('location: ' . $_SERVER["DOCUMENT_ROOT"] . '/View/Login/inicioSesion.php');
         }
         else
         {

@@ -1,5 +1,5 @@
 <?php
-    include_once 'BaseDatos.php';
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Model/BaseDatos.php';
 
     function IniciarSesionModel($correo, $contrasenna)
     {
