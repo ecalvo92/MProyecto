@@ -61,7 +61,7 @@ CREATE TABLE `tusuario` (
   UNIQUE KEY `CorreoElectronico_UNIQUE` (`CorreoElectronico`),
   KEY `FK_ROL` (`ConsecutivoRol`),
   CONSTRAINT `FK_ROL` FOREIGN KEY (`ConsecutivoRol`) REFERENCES `trol` (`Consecutivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,13 +70,44 @@ CREATE TABLE `tusuario` (
 
 LOCK TABLES `tusuario` WRITE;
 /*!40000 ALTER TABLE `tusuario` DISABLE KEYS */;
-INSERT INTO `tusuario` VALUES (6,'304590415','Eduardo Calvo Castillo','ecalvo90415@ufide.ac.cr','90415',_binary '',2),(13,'304590416','Eduardo Calvo Castillo','ecalvo90416@ufide.ac.cr','90416',_binary '',2);
+INSERT INTO `tusuario` VALUES (14,'304590415','Eduardo','edcalvo92@hotmail.com','90415',_binary '',2),(15,'304590416','Eduardo','ecalvo90416@ufide.ac.cr','90416',_binary '',2),(16,'304590417','Eduardo','ecalvo90417@ufide.ac.cr','90417',_binary '',2),(17,'304590418','Eduardo','ecalvo90418@ufide.ac.cr','18',_binary '',2);
 /*!40000 ALTER TABLE `tusuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'cursobd'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `IniciarSesion` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `IniciarSesion`(pCorreoElectronico varchar(80),
+															pContrasena varchar(10))
+BEGIN
+
+	SELECT	Consecutivo,
+			Identificacion,
+			Nombre,
+			CorreoElectronico,
+			Activo,
+			ConsecutivoRol
+	FROM 	cursobd.tusuario
+	WHERE 	CorreoElectronico = pCorreoElectronico
+		AND Contrasena = pContrasena
+        AND Activo = 1;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `RegistrarUsuario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -88,12 +119,12 @@ UNLOCK TABLES;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarUsuario`(pIdentificacion varchar(20),
-															   pNombre varchar(255),
-															   pCorreoElectronico varchar(80),
-															   pContrasena varchar(10))
+															 pNombre varchar(255),
+															 pCorreoElectronico varchar(80),
+															 pContrasena varchar(10))
 BEGIN
 
-	INSERT INTO `cursobd`.`tusuario`(`Identificacion`,`Nombre`,`CorreoElectronico`,`Contrasena`,`Activo`,`ConsecutivoRol`)
+	INSERT INTO cursobd.tusuario(Identificacion,Nombre,CorreoElectronico,Contrasena,Activo,ConsecutivoRol)
 	VALUES	(pIdentificacion,pNombre,pCorreoElectronico,pContrasena,1,2);
 
 END ;;
@@ -112,4 +143,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-09 20:40:37
+-- Dump completed on 2024-10-16 22:02:40

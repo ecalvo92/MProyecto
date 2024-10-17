@@ -17,7 +17,7 @@
             $datos = mysqli_fetch_array($resultado);
             $_SESSION["NombreUsuario"] = $datos["Nombre"];
 
-            header('location: ' . $_SERVER["DOCUMENT_ROOT"] . 'View/home.php');
+            header('location: ../../View/home.php');
         }
         else
         {
@@ -29,7 +29,7 @@
     if(isset($_POST["btnCerrarSesion"]))
     {
         session_destroy();
-        header('location: ' . $_SERVER["DOCUMENT_ROOT"] . '/View/home.php');
+        header('location: ../../View/home.php');
     }
 
     if(isset($_POST["btnRegistrarUsuario"]))
@@ -43,7 +43,7 @@
 
         if($resultado == true)
         {
-            header('location: ' . $_SERVER["DOCUMENT_ROOT"] . '/View/Login/inicioSesion.php');
+            header('location: ../../View/Login/inicioSesion.php');
         }
         else
         {

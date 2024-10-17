@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Proyecto Web Miércoles</title>
-    <link rel="shortcut icon" type="image/png" href="images/seodashlogo.png" />
+    <link rel="shortcut icon" type="image/png" href="../images/seodashlogo.png" />
     <link rel="stylesheet" href="../css/styles.min.css" />
 </head>
 
@@ -28,7 +28,7 @@
                                     <img src="../images/logo-light.svg" alt="">
                                 </a>
 
-                                <p class="text-center">Inicio de sesión</p>
+                                <p class="text-center">Iniciar sesión</p>
 
                                 <?php
                                     if(isset($_POST["txtMensaje"]))
@@ -74,8 +74,8 @@
         </div>
     </div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
 
