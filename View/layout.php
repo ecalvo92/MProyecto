@@ -12,7 +12,7 @@
                 <div>
                     <div class="brand-logo d-flex align-items-center justify-content-between">
                         <a href="home.php" class="text-nowrap logo-img">
-                            <img src="images/logo-light.svg" alt="" />
+                            <img src="../images/logo-light.svg" alt="" />
                         </a>
                         <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                             <i class="ti ti-x fs-8"></i>
@@ -21,16 +21,12 @@
 
                     <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                         <ul id="sidebarnav">
-                            <li class="nav-small-cap">
-                                <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
-                                <span class="hide-menu">Home</span>
-                            </li>
                             <li class="sidebar-item">
-                                <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                                <a class="sidebar-link" href="../Login/home.php" aria-expanded="false">
                                     <span>
                                         <iconify-icon icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
                                     </span>
-                                    <span class="hide-menu">Dashboard 2</span>
+                                    <span class="hide-menu">Inicio</span>
                                 </a>
                             </li>
                             <li class="nav-small-cap">
@@ -38,21 +34,12 @@
                                 <span class="hide-menu">Mantenimientos</span>
                             </li>
                             <li class="sidebar-item">
-                                <a class="sidebar-link" href="consultaUsuarios.php" aria-expanded="false">
+                                <a class="sidebar-link" href="../Usuario/consultarUsuarios.php" aria-expanded="false">
                                     <span>
                                         <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
                                         </iconify-icon>
                                     </span>
-                                    <span class="hide-menu">Personas</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
-                                    <span>
-                                        <iconify-icon icon="solar:bookmark-square-minimalistic-bold-duotone" class="fs-6">
-                                        </iconify-icon>
-                                    </span>
-                                    <span class="hide-menu">Card</span>
+                                    <span class="hide-menu">Usuarios</span>
                                 </a>
                             </li>
                         </ul>
@@ -88,7 +75,7 @@
 
                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                                    <img src="../images/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
@@ -103,7 +90,7 @@
                                                     <i class="ti ti-user fs-6"></i>
                                                     <p class="mb-0 fs-3">Mi Perfil</p>
                                                 </a>
-                                                <a href="javascript:void(0)"
+                                                <a href="../Usuario/cambiarAcceso.php"
                                                     class="d-flex align-items-center gap-2 dropdown-item">
                                                     <i class="ti ti-list-check fs-6"></i>
                                                     <p class="mb-0 fs-3">Seguridad</p>
@@ -116,7 +103,7 @@
                                         }
                                         else
                                         {
-                                            echo '<a href="Login/inicioSesion.php" style="width:150px"
+                                            echo '<a href="../Login/inicioSesion.php" style="width:150px"
                                                     class="btn btn-outline-primary mx-3 mt-2 d-block">Iniciar Sesión</a>';
                                         }
                                         

@@ -17,7 +17,7 @@
             $datos = mysqli_fetch_array($resultado);
             $_SESSION["NombreUsuario"] = $datos["Nombre"];
 
-            header('location: ../../View/home.php');
+            header('location: ../../View/Login/home.php');
         }
         else
         {
@@ -29,7 +29,7 @@
     if(isset($_POST["btnCerrarSesion"]))
     {
         session_destroy();
-        header('location: ../../View/home.php');
+        header('location: ../../View/Login/home.php');
     }
 
     if(isset($_POST["btnRegistrarUsuario"]))
@@ -100,8 +100,8 @@
         require 'PHPMailer/src/PHPMailer.php';
         require 'PHPMailer/src/SMTP.php';
 
-        $correoSalida = "clasesphp@outlook.com";
-        $contrasennaSalida = "phpclases2024*";
+        $correoSalida = "";
+        $contrasennaSalida = "";
 
         $mail = new PHPMailer();
         $mail -> CharSet = 'UTF-8';
