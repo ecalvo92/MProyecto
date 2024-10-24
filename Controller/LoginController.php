@@ -64,13 +64,24 @@
 
             ActualizarContrasennaModel($datos["Consecutivo"], $codigo);
 
-            header('location: ../../View/home.php');
+            $contenido = "<html><body>
+            Estimado(a) " . $datos["Nombre"] . "<br/><br/>
+            Se ha generado el siguiente código de seguridad: <b>" . $codigo . "</b><br/>
+            Recuerde realizar el cambio de contraseña una vez que ingrese a nuestro sistrema<br/><br/>
+            Muchas gracias.
+
+            </body></html>";
+
+            EnviarCorreo("Acceso al sistema", $contenido, $correo);
+
+            header('location: ../../View/Login/inicioSesion.php');
         }
         else
         {
             $_POST["txtMensaje"] = "Su información no se ha validado correctamente";
         }
     }
+
 
     function GenerarCodigo() {
         $alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -81,6 +92,35 @@
             $pass[] = $alphabet[$n];
         }
         return implode($pass);
+    }
+
+
+    function EnviarCorreo($asunto,$contenido,$destinatario)
+    {
+        require 'PHPMailer/src/PHPMailer.php';
+        require 'PHPMailer/src/SMTP.php';
+
+        $correoSalida = "clasesphp@outlook.com";
+        $contrasennaSalida = "phpclases2024*";
+
+        $mail = new PHPMailer();
+        $mail -> CharSet = 'UTF-8';
+
+        $mail -> IsSMTP();
+        $mail -> IsHTML(true); 
+        $mail -> Host = 'smtp.office365.com';
+        $mail -> SMTPSecure = 'tls';
+        $mail -> Port = 587;                      
+        $mail -> SMTPAuth = true;
+        $mail -> Username = $correoSalida;               
+        $mail -> Password = $contrasennaSalida;                                
+        
+        $mail -> SetFrom($correoSalida);
+        $mail -> Subject = $asunto;
+        $mail -> MsgHTML($contenido);   
+        $mail -> AddAddress($destinatario);
+
+        $mail -> send();
     }
 
 ?>
