@@ -93,29 +93,26 @@
 
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
-                                    <div class="message-body">
-                                        <a href="javascript:void(0)"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-user fs-6"></i>
-                                            <p class="mb-0 fs-3">My Profile</p>
-                                        </a>
-                                        <a href="javascript:void(0)"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-mail fs-6"></i>
-                                            <p class="mb-0 fs-3">My Account</p>
-                                        </a>
-                                        <a href="javascript:void(0)"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-list-check fs-6"></i>
-                                            <p class="mb-0 fs-3">My Task</p>
-                                        </a>';
+                                    <div class="message-body">';
 
                                         if(isset($_SESSION["NombreUsuario"]))
                                         {
-                                            echo '<form action="" method="POST">
+                                            echo '
+                                                <a href="javascript:void(0)"
+                                                    class="d-flex align-items-center gap-2 dropdown-item">
+                                                    <i class="ti ti-user fs-6"></i>
+                                                    <p class="mb-0 fs-3">Mi Perfil</p>
+                                                </a>
+                                                <a href="javascript:void(0)"
+                                                    class="d-flex align-items-center gap-2 dropdown-item">
+                                                    <i class="ti ti-list-check fs-6"></i>
+                                                    <p class="mb-0 fs-3">Seguridad</p>
+                                                </a>
+
+                                                <form action="" method="POST">
                                                     <button type="submit" style="width:150px" id="btnCerrarSesion" name="btnCerrarSesion"
                                                     class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar Sesión</button>
-                                                  </form>';
+                                                </form>';
                                         }
                                         else
                                         {
