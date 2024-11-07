@@ -22,13 +22,20 @@
         ?>
 
         <div class="body-wrapper">
-            
+
             <?php
                 MostrarHeader();
             ?>
 
             <div class="container-fluid">
                 <div class="row">
+
+                    <?php
+                        if(isset($_POST["txtMensaje"]))
+                        {
+                            echo '<div class="alert alert-info Centrado">' . $_POST["txtMensaje"] . '</div>';
+                        }
+                    ?>
 
                 </div>
             </div>

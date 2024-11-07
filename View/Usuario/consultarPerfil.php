@@ -1,6 +1,8 @@
 <?php
     include_once $_SERVER["DOCUMENT_ROOT"] . '/View/layout.php';
     include_once $_SERVER["DOCUMENT_ROOT"] . '/Controller/UsuarioController.php';
+
+    $datos = ConsultarUsuario();
 ?>
 
 <!doctype html>
@@ -33,7 +35,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Actualzar Contraseña</h5>
+                            <h5 class="card-title fw-semibold mb-4">Mi Perfil</h5>
 
                             <?php
                                 if(isset($_POST["txtMensaje"]))
@@ -45,21 +47,32 @@
                             <form action="" method="POST">
 
                                 <div class="mb-3">
-                                    <label class="form-label">Contraseña Actual</label>
-                                    <input type="password" class="form-control" id="txtContrasennaActual" name="txtContrasennaActual">
+                                    <label class="form-label">Identificación</label>
+                                    <input type="text" class="form-control" id="txtIdentificacion"
+                                        name="txtIdentificacion" value="<?php echo $datos["Identificacion"] ?>">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Nueva Contraseña</label>
-                                    <input type="password" class="form-control" id="txtContrasennaNueva" name="txtContrasennaNueva">
+                                    <label class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="txtNombre" name="txtNombre"
+                                    value="<?php echo $datos["Nombre"] ?>">
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Confirmar Contraseña</label>
-                                    <input type="password" class="form-control" id="txtContrasennaConfirmar" name="txtContrasennaConfirmar">
+                                    <label class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="txtCorreo" name="txtCorreo"
+                                    value="<?php echo $datos["CorreoElectronico"] ?>">
                                 </div>
 
-                                <input type="submit" class="btn btn-primary" value="Procesar" id="btnActualizarAcceso" name="btnActualizarAcceso">
+                                <div class="mb-4">
+                                    <label class="form-label">Rol</label>
+                                    <input type="text" class="form-control" id="txtRol" name="txtRol" readOnly="true"
+                                    style="background-color:#f1f1f1"
+                                    value="<?php echo $datos["NombreRol"] ?>">
+                                </div>
+
+                                <input type="submit" class="btn btn-primary" value="Procesar" id="btnActualizarPerfil"
+                                    name="btnActualizarPerfil">
 
                             </form>
                         </div>
