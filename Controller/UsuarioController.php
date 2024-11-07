@@ -51,6 +51,16 @@
 
     }
 
+    function ConsultarUsuarios()
+    {
+        $resultado = ConsultarUsuariosModel();
+
+        if($resultado != null && $resultado -> num_rows > 0)
+        {
+            return $resultado;
+        }
+    }
+
     if(isset($_POST["btnActualizarPerfil"]))
     {
         $identificacion = $_POST["txtIdentificacion"];

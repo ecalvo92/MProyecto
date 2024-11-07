@@ -80,7 +80,7 @@
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
-    <script src="../js/RegistrarUsuario.js"></script>
+    <script src="../js/RegistrarUsuarios.js"></script>
 
 </body>
 

@@ -37,7 +37,7 @@ CREATE TABLE `trol` (
 
 LOCK TABLES `trol` WRITE;
 /*!40000 ALTER TABLE `trol` DISABLE KEYS */;
-INSERT INTO `trol` VALUES (1,'Administradores'),(2,'Clientes');
+INSERT INTO `trol` VALUES (1,'Administrador(a)'),(2,'Cliente(a)');
 /*!40000 ALTER TABLE `trol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `tusuario` (
   UNIQUE KEY `CorreoElectronico_UNIQUE` (`CorreoElectronico`),
   KEY `FK_ROL` (`ConsecutivoRol`),
   CONSTRAINT `FK_ROL` FOREIGN KEY (`ConsecutivoRol`) REFERENCES `trol` (`Consecutivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `tusuario` (
 
 LOCK TABLES `tusuario` WRITE;
 /*!40000 ALTER TABLE `tusuario` DISABLE KEYS */;
-INSERT INTO `tusuario` VALUES (20,'304590415','Eduardo Calvo Castillo','ecalvo90415@ufide.ac.cr','HRYCQL3C',_binary '',2);
+INSERT INTO `tusuario` VALUES (20,'304590415','Eduardo','ecalvo90415@ufide.ac.cr','90415',_binary '',1),(21,'304590416','Eduardo 16','ecalvo90416@ufide.ac.cr','90416',_binary '',2);
 /*!40000 ALTER TABLE `tusuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,6 +101,94 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ActualizarPerfil` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarPerfil`(pConsecutivo bigint,
+															   pIdentificacion varchar(20),
+															   pNombre varchar(255),
+															   pCorreo varchar(80))
+BEGIN
+
+	UPDATE 	cursobd.tusuario
+    SET 	Identificacion = pIdentificacion,
+			Nombre = pNombre,
+            CorreoElectronico = pCorreo
+    WHERE	Consecutivo = pConsecutivo;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarUsuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarUsuario`(pConsecutivo bigint)
+BEGIN
+
+	SELECT	U.Consecutivo,
+			Identificacion,
+			Nombre,
+			CorreoElectronico,
+			Activo,
+			ConsecutivoRol,
+            R.NombreRol
+	FROM 	cursobd.tusuario U
+    INNER 	JOIN cursobd.tRol R on U.ConsecutivoRol = R.Consecutivo
+	WHERE 	U.Consecutivo = pConsecutivo;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarUsuarios` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarUsuarios`()
+BEGIN
+
+	SELECT	U.Consecutivo,
+			Identificacion,
+			Nombre,
+			CorreoElectronico,
+			Activo,
+            CASE WHEN Activo = 1 THEN 'Activo' ELSE 'Inactivo' END 'DescripcionActivo',
+			ConsecutivoRol,
+            R.NombreRol
+	FROM 	cursobd.tusuario U
+    INNER 	JOIN cursobd.tRol R on U.ConsecutivoRol = R.Consecutivo;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `IniciarSesion` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -115,13 +203,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `IniciarSesion`(pCorreoElectronico v
 															pContrasena varchar(10))
 BEGIN
 
-	SELECT	Consecutivo,
+	SELECT	U.Consecutivo,
 			Identificacion,
 			Nombre,
 			CorreoElectronico,
 			Activo,
-			ConsecutivoRol
-	FROM 	cursobd.tusuario
+			ConsecutivoRol,
+            R.NombreRol
+	FROM 	cursobd.tusuario U
+    INNER 	JOIN cursobd.tRol R on U.ConsecutivoRol = R.Consecutivo
 	WHERE 	CorreoElectronico = pCorreoElectronico
 		AND Contrasena = pContrasena
         AND Activo = 1;
@@ -195,4 +285,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-23 21:25:26
+-- Dump completed on 2024-11-06 20:53:03

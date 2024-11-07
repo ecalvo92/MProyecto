@@ -28,21 +28,27 @@
                                     </span>
                                     <span class="hide-menu">Inicio</span>
                                 </a>
-                            </li>
-                            <li class="nav-small-cap">
-                                <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
-                                <span class="hide-menu">Mantenimientos</span>
-                            </li>
-                            <li class="sidebar-item">
-                                <a class="sidebar-link" href="../Usuario/consultarUsuarios.php" aria-expanded="false">
-                                    <span>
-                                        <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
-                                        </iconify-icon>
-                                    </span>
-                                    <span class="hide-menu">Usuarios</span>
-                                </a>
-                            </li>
-                        </ul>
+                            </li>';
+
+                            if(isset($_SESSION["NombreUsuario"]) && $_SESSION["ConsecutivoRolUsuario"] == "1")
+                            {
+                                echo '
+                                    <li class="nav-small-cap">
+                                        <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
+                                        <span class="hide-menu">Mantenimientos</span>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" href="../Usuario/consultarUsuarios.php" aria-expanded="false">
+                                            <span>
+                                                <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
+                                                </iconify-icon>
+                                            </span>
+                                            <span class="hide-menu">Usuarios</span>
+                                        </a>
+                                    </li>';
+                            }
+                        
+                        echo '</ul>
                     </nav>
                 </div>
             </aside>

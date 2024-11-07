@@ -19,6 +19,24 @@
         }
     }
 
+    function ConsultarUsuariosModel()
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL ConsultarUsuarios()";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return null;
+        }
+    }
+
     function ActualizarPerfilModel($consecutivo,$identificacion,$nombre,$correo)
     {
         try
