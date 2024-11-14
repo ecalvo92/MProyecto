@@ -61,7 +61,7 @@ CREATE TABLE `tusuario` (
   UNIQUE KEY `CorreoElectronico_UNIQUE` (`CorreoElectronico`),
   KEY `FK_ROL` (`ConsecutivoRol`),
   CONSTRAINT `FK_ROL` FOREIGN KEY (`ConsecutivoRol`) REFERENCES `trol` (`Consecutivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `tusuario` (
 
 LOCK TABLES `tusuario` WRITE;
 /*!40000 ALTER TABLE `tusuario` DISABLE KEYS */;
-INSERT INTO `tusuario` VALUES (20,'304590415','Eduardo','ecalvo90415@ufide.ac.cr','90415',_binary '',1),(21,'304590416','Eduardo 16','ecalvo90416@ufide.ac.cr','90416',_binary '',2);
+INSERT INTO `tusuario` VALUES (20,'304590415','Eduardo Administrador','ecalvo90415@ufide.ac.cr','90415',_binary '',1),(21,'304590416','Eduardo Cliente','ecalvo90416@ufide.ac.cr','90416',_binary '',2),(22,'','','','',_binary '',2),(27,'30459041','','sadsadsa@u.com','asdsadsa',_binary '',2);
 /*!40000 ALTER TABLE `tusuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,14 +114,68 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarPerfil`(pConsecutivo bigint,
 															   pIdentificacion varchar(20),
 															   pNombre varchar(255),
-															   pCorreo varchar(80))
+															   pCorreo varchar(80),
+                                                               pConsecutivoRol int)
 BEGIN
 
 	UPDATE 	cursobd.tusuario
     SET 	Identificacion = pIdentificacion,
 			Nombre = pNombre,
-            CorreoElectronico = pCorreo
+            CorreoElectronico = pCorreo,
+            ConsecutivoRol = CASE WHEN pConsecutivoRol != 0 THEN pConsecutivoRol ELSE ConsecutivoRol END
     WHERE	Consecutivo = pConsecutivo;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `CambiarEstadoUsuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CambiarEstadoUsuario`(pConsecutivo bigint)
+BEGIN
+
+	/* Borrado físico
+		DELETE FROM cursobd.tusuario
+		WHERE	Consecutivo = pConsecutivo;
+    */
+
+	/*Borrado lógico*/
+	UPDATE 	cursobd.tusuario
+    SET 	Activo = CASE WHEN Activo = 1 THEN 0 ELSE 1 END
+    WHERE	Consecutivo = pConsecutivo;
+    
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarRoles` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarRoles`()
+BEGIN
+
+	SELECT	Consecutivo, NombreRol
+	FROM 	cursobd.tRol;
 
 END ;;
 DELIMITER ;
@@ -169,7 +223,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarUsuarios`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarUsuarios`(pConsecutivo bigint)
 BEGIN
 
 	SELECT	U.Consecutivo,
@@ -181,7 +235,8 @@ BEGIN
 			ConsecutivoRol,
             R.NombreRol
 	FROM 	cursobd.tusuario U
-    INNER 	JOIN cursobd.tRol R on U.ConsecutivoRol = R.Consecutivo;
+    INNER 	JOIN cursobd.tRol R on U.ConsecutivoRol = R.Consecutivo
+    WHERE 	U.Consecutivo != pConsecutivo;
 
 END ;;
 DELIMITER ;
@@ -285,4 +340,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-06 20:53:03
+-- Dump completed on 2024-11-13 21:01:15

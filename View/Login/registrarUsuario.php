@@ -42,22 +42,24 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Identificación</label>
-                                        <input type="text" class="form-control" id="txtIdentificacion" name="txtIdentificacion">
+                                        <input type="text" class="form-control" id="txtIdentificacion" name="txtIdentificacion"
+                                        onkeyup="ConsultarNombre();" required>
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="txtNombre" name="txtNombre">
+                                        <input type="text" class="form-control" id="txtNombre" name="txtNombre" readOnly="true"
+                                        style="background-color:#f1f1f1">
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label">Correo Electrónico</label>
-                                        <input type="email" class="form-control" id="txtCorreo" name="txtCorreo">
+                                        <input type="email" class="form-control" id="txtCorreo" name="txtCorreo" required>
                                     </div>
 
                                     <div class="mb-4">
                                         <label class="form-label">Contraseña</label>
-                                        <input type="password" class="form-control" id="txtContrasenna" name="txtContrasenna">
+                                        <input type="password" class="form-control" id="txtContrasenna" name="txtContrasenna" required>
                                     </div>
 
                                     <input type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4" value="Procesar"
