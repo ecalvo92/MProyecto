@@ -19,13 +19,13 @@
         }
     }
 
-    function ConsultarUsuariosModel()
+    function ConsultarUsuariosModel($consecutivo)
     {
         try
         {
             $enlace = AbrirBD();
 
-            $sentencia = "CALL ConsultarUsuarios()";
+            $sentencia = "CALL ConsultarUsuarios('$consecutivo')";
             $resultado = $enlace -> query($sentencia);
 
             CerrarBD($enlace);
@@ -54,5 +54,25 @@
             return false;
         }
     }
+
+    function CambiarEstadoUsuarioModel($consecutivo)
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL CambiarEstadoUsuario('$consecutivo')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return false;
+        }
+    }
+
+    
 
 ?>

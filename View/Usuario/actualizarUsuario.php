@@ -2,7 +2,7 @@
     include_once $_SERVER["DOCUMENT_ROOT"] . '/View/layout.php';
     include_once $_SERVER["DOCUMENT_ROOT"] . '/Controller/UsuarioController.php';
 
-    $id = $_SESSION["ConsecutivoUsuario"];
+    $id = $_GET["id"];
     $datos = ConsultarUsuario($id);
 ?>
 
@@ -36,7 +36,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Mi Perfil</h5>
+                            <h5 class="card-title fw-semibold mb-4">Actualizar Usuario</h5>
 
                             <?php
                                 if(isset($_POST["txtMensaje"]))
@@ -67,9 +67,7 @@
 
                                 <div class="mb-4">
                                     <label class="form-label">Rol</label>
-                                    <input type="text" class="form-control" id="txtRol" name="txtRol" readOnly="true"
-                                    style="background-color:#f1f1f1"
-                                    value="<?php echo $datos["NombreRol"] ?>">
+                                    
                                 </div>
 
                                 <input type="submit" class="btn btn-primary" value="Procesar" id="btnActualizarPerfil"

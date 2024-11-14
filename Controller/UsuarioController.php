@@ -35,9 +35,9 @@
         }
     }
 
-    function ConsultarUsuario()
+    function ConsultarUsuario($consecutivo)
     {
-        $resultado = ConsultarUsuarioModel($_SESSION["ConsecutivoUsuario"]);
+        $resultado = ConsultarUsuarioModel($consecutivo);
 
         if($resultado != null && $resultado -> num_rows > 0)
         {
@@ -53,7 +53,7 @@
 
     function ConsultarUsuarios()
     {
-        $resultado = ConsultarUsuariosModel();
+        $resultado = ConsultarUsuariosModel($_SESSION["ConsecutivoUsuario"]);
 
         if($resultado != null && $resultado -> num_rows > 0)
         {
@@ -77,6 +77,22 @@
         else
         {
             $_POST["txtMensaje"] = "Su información no se ha actualizado correctamente";
+        }
+    }
+
+    if(isset($_POST["btnCambiarEstadoUsuario"]))
+    {
+        $consecutivo = $_POST["txtConsecutivo"];
+
+        $resultado = CambiarEstadoUsuarioModel($consecutivo);
+        
+        if($resultado == true)
+        {
+            header('location: ../../View/Usuario/consultarUsuarios.php');
+        }
+        else
+        {
+            $_POST["txtMensaje"] = "No fue posible actualizar el estado del usuario";
         }
     }
 
