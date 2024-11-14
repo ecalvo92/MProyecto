@@ -92,7 +92,6 @@
         
         if($resultado == true)
         {
-            $_SESSION["NombreUsuario"] = $nombre;
             header('location: ../../View/Usuario/consultarUsuarios.php');
         }
         else
