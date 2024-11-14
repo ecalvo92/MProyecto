@@ -33,11 +33,7 @@
                             if(isset($_SESSION["NombreUsuario"]) && $_SESSION["ConsecutivoRolUsuario"] == "1")
                             {
                                 echo '
-                                    <li class="nav-small-cap">
-                                        <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
-                                        <span class="hide-menu">Mantenimientos</span>
-                                    </li>
-                                    <li class="sidebar-item">
+                                     <li class="sidebar-item">
                                         <a class="sidebar-link" href="../Usuario/consultarUsuarios.php" aria-expanded="false">
                                             <span>
                                                 <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">

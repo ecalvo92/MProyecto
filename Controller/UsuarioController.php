@@ -67,7 +67,7 @@
         $nombre = $_POST["txtNombre"];
         $correo = $_POST["txtCorreo"];
 
-        $resultado = ActualizarPerfilModel($_SESSION["ConsecutivoUsuario"],$identificacion,$nombre,$correo);
+        $resultado = ActualizarPerfilModel($_SESSION["ConsecutivoUsuario"],$identificacion,$nombre,$correo,0);
         
         if($resultado == true)
         {
@@ -77,6 +77,27 @@
         else
         {
             $_POST["txtMensaje"] = "Su información no se ha actualizado correctamente";
+        }
+    }
+
+    if(isset($_POST["btnActualizarUsuario"]))
+    {
+        $consecutivo = $_POST["txtConsecutivo"];
+        $identificacion = $_POST["txtIdentificacion"];
+        $nombre = $_POST["txtNombre"];
+        $correo = $_POST["txtCorreo"];
+        $rol = $_POST["ddlRoles"];
+
+        $resultado = ActualizarPerfilModel($consecutivo,$identificacion,$nombre,$correo,$rol);
+        
+        if($resultado == true)
+        {
+            $_SESSION["NombreUsuario"] = $nombre;
+            header('location: ../../View/Usuario/consultarUsuarios.php');
+        }
+        else
+        {
+            $_POST["txtMensaje"] = "No fue posible actualizar la información del usuario";
         }
     }
 
@@ -95,5 +116,16 @@
             $_POST["txtMensaje"] = "No fue posible actualizar el estado del usuario";
         }
     }
+
+    function ConsultarRoles()
+    {
+        $resultado = ConsultarRolesModel();
+
+        if($resultado != null && $resultado -> num_rows > 0)
+        {
+            return $resultado;
+        }
+    }
+    
 
 ?>

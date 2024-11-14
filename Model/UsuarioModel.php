@@ -37,13 +37,13 @@
         }
     }
 
-    function ActualizarPerfilModel($consecutivo,$identificacion,$nombre,$correo)
+    function ActualizarPerfilModel($consecutivo,$identificacion,$nombre,$correo,$rol)
     {
         try
         {
             $enlace = AbrirBD();
 
-            $sentencia = "CALL ActualizarPerfil('$consecutivo','$identificacion','$nombre','$correo')";
+            $sentencia = "CALL ActualizarPerfil('$consecutivo','$identificacion','$nombre','$correo','$rol')";
             $resultado = $enlace -> query($sentencia);
 
             CerrarBD($enlace);
@@ -73,6 +73,22 @@
         }
     }
 
-    
+    function ConsultarRolesModel()
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL ConsultarRoles()";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return null;
+        }
+    }
 
 ?>
