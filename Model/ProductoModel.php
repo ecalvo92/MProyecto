@@ -19,4 +19,22 @@
         }
     }
 
+    function RegistrarProductoModel($nombre,$descripcion,$precio,$cantidad,$imagen)
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL RegistrarProducto('$nombre','$descripcion','$precio','$cantidad','$imagen')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return false;
+        }
+    }
+
 ?>

@@ -1,5 +1,6 @@
 <?php
     include_once $_SERVER["DOCUMENT_ROOT"] . '/View/layout.php';
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Controller/ProductoController.php';
 ?>
 
 <!doctype html>
@@ -9,8 +10,8 @@
     ReferenciasCSS();
 ?>
 
-<body>
-    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+<body class="page-wrapper">
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
 
         <?php
@@ -32,6 +33,29 @@
                             echo '<div class="alert alert-info Centrado">' . $_POST["txtMensaje"] . '</div>';
                         }
                     ?>
+
+                    <div class="row">
+                        <?php
+                            $datos = ConsultarProductos();
+                            While($fila = mysqli_fetch_array($datos))
+                            {
+                                echo '
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card">
+                                        <div style="text-align:center">
+                                            <img class="card-img-top" src="' . $fila["Imagen"] . '" style="width:175px; height:150px; margin-top:20px">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">' . $fila["Nombre"] . '</h5>
+                                            <p class="card-text">' . $fila["Descripcion"] . '</p>
+                                            <a href="#" class="btn btn-primary">Añadir</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                ';
+                            }
+                        ?>
+                    </div>
 
                 </div>
             </div>

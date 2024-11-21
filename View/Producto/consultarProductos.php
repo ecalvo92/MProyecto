@@ -48,7 +48,6 @@
                                         <tr class="border-2 border-bottom border-primary border-0">
                                             <th scope="col">#</th>
                                             <th scope="col">Nombre</th>
-                                            <th scope="col">Descripción</th>
                                             <th scope="col">Precio</th>
                                             <th scope="col">Cantidad</th>
                                             <th scope="col">Imagen</th>
@@ -63,14 +62,13 @@
                                             {
                                                 echo "<tr>";
                                                 echo "<td>" . $fila["Consecutivo"] . "</td>";
-                                                echo "<td>" . $fila["Nombre"] . "</td>";
-                                                echo "<td>" . $fila["Descripcion"] . "</td>";
+                                                echo "<td title='" . $fila["Descripcion"] . "'>" . $fila["Nombre"] . "</td>";
                                                 echo "<td>" . $fila["Precio"] . "</td>";
                                                 echo "<td>" . $fila["Cantidad"] . "</td>";
-                                                echo "<td>" . $fila["Imagen"] . "</td>";
+                                                echo "<td><img width='100' height='85' src='" . $fila["Imagen"] . "'></img></td>";
                                                 echo '<td>
 
-                                                        <a href="actualizarProducto.php?id=' . $fila[""] . '" class="btn">
+                                                        <a href="actualizarProducto.php?id=' . $fila["Consecutivo"] . '" class="btn">
                                                             <i class="fa fa-edit" style="color:blue; font-size: 1.6em;"></i>
                                                         </a>
 
