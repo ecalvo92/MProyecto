@@ -53,12 +53,7 @@
 
     function ConsultarUsuarios()
     {
-        $resultado = ConsultarUsuariosModel($_SESSION["ConsecutivoUsuario"]);
-
-        if($resultado != null && $resultado -> num_rows > 0)
-        {
-            return $resultado;
-        }
+        return ConsultarUsuariosModel($_SESSION["ConsecutivoUsuario"]);
     }
 
     if(isset($_POST["btnActualizarPerfil"]))
@@ -118,12 +113,7 @@
 
     function ConsultarRoles()
     {
-        $resultado = ConsultarRolesModel();
-
-        if($resultado != null && $resultado -> num_rows > 0)
-        {
-            return $resultado;
-        }
+        return ConsultarRolesModel();
     }
     
 

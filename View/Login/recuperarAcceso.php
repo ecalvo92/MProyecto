@@ -1,4 +1,5 @@
 <?php
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/View/layoutExterno.php';
     include_once $_SERVER["DOCUMENT_ROOT"] . '/Controller/LoginController.php';
 ?>
 
