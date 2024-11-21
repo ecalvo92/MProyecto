@@ -6,13 +6,9 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Proyecto Web Miércoles</title>
-    <link rel="shortcut icon" type="image/png" href="../images/seodashlogo.png" />
-    <link rel="stylesheet" href="../css/styles.min.css" />
-</head>
+<?php
+    ReferenciasCSS();
+?>
 
 <body class="page-wrapper">
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -69,12 +65,11 @@
             </div>
         </div>
     </div>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/simplebar.js"></script>
-    <script src="../js/sidebarmenu.js"></script>
-    <script src="../js/app.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+    
+    <?php
+        ReferenciasJS();
+    ?>
+
 </body>
 
 </html>
