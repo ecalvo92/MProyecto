@@ -18,6 +18,36 @@ USE `cursobd`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `tcarrito`
+--
+
+DROP TABLE IF EXISTS `tcarrito`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tcarrito` (
+  `Consecutivo` bigint(20) NOT NULL,
+  `ConsecutivoProducto` bigint(20) DEFAULT NULL,
+  `ConsecutivoUsuario` bigint(20) DEFAULT NULL,
+  `CantidadDeseada` int(11) DEFAULT NULL,
+  `Fecha` datetime DEFAULT NULL,
+  PRIMARY KEY (`Consecutivo`),
+  KEY `FK_Usuario` (`ConsecutivoUsuario`),
+  KEY `FK_Producto` (`ConsecutivoProducto`),
+  CONSTRAINT `FK_Producto` FOREIGN KEY (`ConsecutivoProducto`) REFERENCES `tproducto` (`Consecutivo`),
+  CONSTRAINT `FK_Usuario` FOREIGN KEY (`ConsecutivoUsuario`) REFERENCES `tusuario` (`Consecutivo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tcarrito`
+--
+
+LOCK TABLES `tcarrito` WRITE;
+/*!40000 ALTER TABLE `tcarrito` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tcarrito` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tproducto`
 --
 
@@ -32,7 +62,7 @@ CREATE TABLE `tproducto` (
   `Cantidad` int(11) NOT NULL,
   `Imagen` varchar(1000) NOT NULL,
   PRIMARY KEY (`Consecutivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +71,7 @@ CREATE TABLE `tproducto` (
 
 LOCK TABLES `tproducto` WRITE;
 /*!40000 ALTER TABLE `tproducto` DISABLE KEYS */;
-INSERT INTO `tproducto` VALUES (2,'Sustagen 1','es un alimento en polvo que ofrece un equilibrio de nutrientes para complementar la dieta habitual de niños, deportistas y personas debilitadas. Se presenta en latas de 200 o 450 gramos en tres sabores',9850.00,20,'/View/products_images/2.jpg'),(3,'Sustagen 2','dasdsadsadsadsadsadsa',9850.00,20,'/View/products_images/sustagen Vainilla.jpg'),(4,'Sustagen 3','asdsadsa',9850.00,20,'/View/products_images/sustagen Vainilla.jpg'),(5,'Sustagen 4','sadsadsadsa',9850.00,20,'/View/products_images/sustagen Vainilla.jpg');
+INSERT INTO `tproducto` VALUES (2,'Sustagen de Vainillla','Es un alimento en polvo que ofrece un equilibrio de nutrientes para complementar la dieta habitual de niños, deportistas y personas debilitadas.',12500.00,8,'/View/products_images/2.jpg'),(3,'Chocolate','Chocoleche es una combinación de leche 100% pura de vaca y cremoso chocolate, es un producto de la Cooperativa de Productores de Leche Dos Pinos.',4200.00,5,'/View/products_images/R.jpg');
 /*!40000 ALTER TABLE `tproducto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +128,7 @@ CREATE TABLE `tusuario` (
 
 LOCK TABLES `tusuario` WRITE;
 /*!40000 ALTER TABLE `tusuario` DISABLE KEYS */;
-INSERT INTO `tusuario` VALUES (20,'304590415','EDUARDO JOSE CALVO CASTILLO','ecalvo90415@ufide.ac.cr','90415',_binary '',1),(21,'304590416','FRANCINI DE LOS ANGELES ROMERO ARAYA','ecalvo90416@ufide.ac.cr','90416',_binary '\0',2);
+INSERT INTO `tusuario` VALUES (20,'304590415','EDUARDO JOSE CALVO CASTILLO','ecalvo90415@ufide.ac.cr','90415',_binary '',1),(21,'304590416','FRANCINI DE LOS ANGELES ROMERO ARAYA','ecalvo90416@ufide.ac.cr','90416',_binary '',2);
 /*!40000 ALTER TABLE `tusuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,6 +189,38 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ActualizarProducto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarProducto`(pConsecutivo bigint,
+																 pNombre varchar(100),
+																 pDescripcion varchar(1000),
+																 pPrecio decimal(10,2),
+																 pCantidad int,
+																 pImagen varchar(1000))
+BEGIN
+
+	UPDATE 	cursobd.tproducto
+    SET 	Nombre = pNombre,
+			Descripcion = pDescripcion,
+            Precio = pPrecio,
+            Cantidad = pCantidad,
+            Imagen = CASE WHEN pImagen = '' THEN Imagen ELSE pImagen END
+    WHERE	Consecutivo = pConsecutivo;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `CambiarEstadoUsuario` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -182,6 +244,34 @@ BEGIN
     SET 	Activo = CASE WHEN Activo = 1 THEN 0 ELSE 1 END
     WHERE	Consecutivo = pConsecutivo;
     
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarProducto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarProducto`(pConsecutivo bigint)
+BEGIN
+
+	SELECT	Consecutivo,
+			Nombre,
+			Descripcion,
+			Precio,
+			Cantidad,
+            Imagen
+	FROM 	cursobd.tproducto
+    WHERE   Consecutivo = pConsecutivo;
 
 END ;;
 DELIMITER ;
@@ -360,6 +450,44 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `RegistrarCarrito` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarCarrito`( pConsecutivoUsuario BIGINT,
+																pConsecutivoProducto BIGINT,
+																pCantidad INT)
+BEGIN
+
+	IF(SELECT COUNT(*) FROM tCarrito WHERE ConsecutivoUsuario = pConsecutivoUsuario 
+									   AND ConsecutivoProducto =  pConsecutivoProducto) = 0
+	THEN
+
+		INSERT INTO cursobd.tcarrito(ConsecutivoProducto,ConsecutivoUsuario,CantidadDeseada,Fecha)
+		VALUES (pConsecutivoProducto,pConsecutivoUsuario,pCantidad,NOW());
+
+	ELSE
+    
+		UPDATE cursobd.tcarrito
+        SET CantidadDeseada = pCantidad,
+			Fecha = NOW()
+		WHERE ConsecutivoUsuario = pConsecutivoUsuario 
+		  AND ConsecutivoProducto =  pConsecutivoProducto;
+
+	END IF;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `RegistrarProducto` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -421,4 +549,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-20 20:56:03
+-- Dump completed on 2024-11-27 20:59:14

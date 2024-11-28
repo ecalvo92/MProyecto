@@ -52,12 +52,14 @@
 
                                 <div class="mb-3">
                                     <label class="form-label">Precio</label>
-                                    <input type="text" class="form-control" id="txtPrecio" name="txtPrecio">
+                                    <input type="text" class="form-control" id="txtPrecio" name="txtPrecio"
+                                    maxlength="8" onkeypress="return SoloNumeros(event)">
                                 </div>
 
                                 <div class="mb-4">
                                     <label class="form-label">Cantidad</label>
-                                    <input type="text" class="form-control" id="txtCantidad" name="txtCantidad">
+                                    <input type="text" class="form-control" id="txtCantidad" name="txtCantidad"
+                                    maxlength="3" onkeypress="return SoloNumeros(event)">
                                 </div>
 
                                 <div class="mb-4">
@@ -81,6 +83,7 @@
     <?php
         ReferenciasJS();
     ?>
+    <script src="../js/Comunes.js"></script>
 
 </body>
 
