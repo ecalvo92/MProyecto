@@ -65,7 +65,7 @@
                                                 echo "<td title='" . $fila["Descripcion"] . "'>" . $fila["Nombre"] . "</td>";
                                                 echo "<td>" . $fila["Precio"] . "</td>";
                                                 echo "<td>" . $fila["Cantidad"] . "</td>";
-                                                echo "<td><img width='100' height='85' src='" . $fila["Imagen"] . "'></img></td>";
+                                                echo "<td><img width='125' height='100' src='" . $fila["Imagen"] . "'></img></td>";
                                                 echo '<td>
 
                                                         <a href="actualizarProducto.php?id=' . $fila["Consecutivo"] . '" class="btn">

@@ -19,6 +19,24 @@
         }
     }
 
+    function ConsultarProductoModel($consecutivo)
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL ConsultarProducto('$consecutivo')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return null;
+        }
+    }
+
     function RegistrarProductoModel($nombre,$descripcion,$precio,$cantidad,$imagen)
     {
         try
@@ -37,4 +55,21 @@
         }
     }
 
+    function ActualizarProductoModel($consecutivo,$nombre,$descripcion,$precio,$cantidad,$imagen)
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL ActualizarProducto('$consecutivo','$nombre','$descripcion','$precio','$cantidad','$imagen')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return false;
+        }
+    }
 ?>

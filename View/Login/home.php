@@ -34,8 +34,7 @@
                         }
                     ?>
 
-                    <div class="row">
-                        <?php
+                    <?php
                             $datos = ConsultarProductos();
                             While($fila = mysqli_fetch_array($datos))
                             {
@@ -47,15 +46,18 @@
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title">' . $fila["Nombre"] . '</h5>
-                                            <p class="card-text">' . $fila["Descripcion"] . '</p>
+                                            <p class="card-text" style="text-align:justify;">' . $fila["Descripcion"] . '</p>
                                             <a href="#" class="btn btn-primary">Añadir</a>
                                         </div>
                                     </div>
                                 </div>
                                 ';
+
+                                //if(isset($_SESSION["NombreUsuario"]))
+                                //{
+                                //}
                             }
                         ?>
-                    </div>
 
                 </div>
             </div>

@@ -63,7 +63,7 @@
                                 <div class="mb-4">
                                     <label class="form-label">Imagen</label>
                                     <input type="file" class="form-control" id="txtImagen" name="txtImagen"
-                                    accept="image/png">
+                                    accept="image/png, image/jpg, image/jpeg">
                                 </div>
 
                                 <input type="submit" class="btn btn-primary" value="Procesar" id="btnRegistrarProducto"
@@ -81,7 +81,6 @@
     <?php
         ReferenciasJS();
     ?>
-    <script src="../js/RegistrarUsuarios.js"></script>
 
 </body>
 

@@ -45,10 +45,9 @@
         }
         else
         {
-            $_POST["txtMensaje"] = "Su información no se ha obtenido correctamente";
+            $_POST["txtMensaje"] = "La información del usuario no se ha obtenido correctamente";
             header('location: ../../View/Login/home.php');
         }
-
     }
 
     function ConsultarUsuarios()

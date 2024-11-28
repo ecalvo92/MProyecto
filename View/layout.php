@@ -11,7 +11,7 @@
             <aside class="left-sidebar">
                 <div>
                     <div class="brand-logo d-flex align-items-center justify-content-between">
-                        <a href="home.php" class="text-nowrap logo-img">
+                        <a href="../Login/home.php" class="text-nowrap logo-img">
                             <img src="../images/logo-light.svg" alt="" />
                         </a>
                         <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
