@@ -48,10 +48,10 @@
                                             <h5 class="card-title">' . $fila["Nombre"] . '</h5>
 
                                             Unidades: ' . $fila["Cantidad"] . ' <br/>
-                                            Precio: ¢' . number_format($fila["Precio"],2) . '
+                                            Precio: ¢ ' . number_format($fila["Precio"],2) . '
 
                                             <br/><br/>
-                                            <textarea class="form-control" style="resize:none; border:0px; text-align:justify; padding: 0px 10px 0px 0px;" rows="5">' . $fila["Descripcion"] . '</textarea>
+                                            <textarea class="form-control" style="resize:none; border:0px; text-align:justify; padding: 0px 10px 0px 0px;" rows="5" readonly="true">' . $fila["Descripcion"] . '</textarea>
                                             <br/>';
 
                                             if(isset($_SESSION["NombreUsuario"]))

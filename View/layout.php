@@ -52,6 +52,21 @@
                                         </a>
                                     </li>';
                             }
+                            
+                            if(isset($_SESSION["NombreUsuario"]))
+                            {
+                                echo '
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" href="../Carrito/consultarCarrito.php" aria-expanded="false">
+                                            <span>
+                                                <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
+                                                </iconify-icon>
+                                            </span>
+                                            <span class="hide-menu">Mi Carrito</span>
+                                        </a>
+                                    </li>';
+                            }
+
                         
                         echo '</ul>
                     </nav>
@@ -141,6 +156,7 @@
                 <link rel="stylesheet" href="../css/sistema.css" />
                 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.min.css" />
             </head>';
     }
 
@@ -155,6 +171,7 @@
             <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
             <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
             <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
         ';
     }
 

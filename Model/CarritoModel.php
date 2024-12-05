@@ -19,4 +19,22 @@
         }
     }
 
+    function ConsultarCarritoModel($consecutivo)
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL ConsultarCarrito('$consecutivo')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return null;
+        }
+    }
+
 ?>

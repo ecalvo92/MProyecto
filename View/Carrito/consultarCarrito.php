@@ -1,6 +1,6 @@
 <?php
     include_once $_SERVER["DOCUMENT_ROOT"] . '/View/layout.php';
-    include_once $_SERVER["DOCUMENT_ROOT"] . '/Controller/ProductoController.php';
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Controller/CarritoController.php';
 ?>
 
 <!doctype html>
@@ -30,49 +30,38 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h5 class="card-title">Consulta de Productos</h5>
-
-                            <br />
-
-                            <a href="registrarProducto.php" class="btn btn-primary">
-                                <i class="fa fa-plus" style="margin-right:5px;"></i>
-                                Registrar Producto
-                            </a>
-
-                            <br />
-                            <br />
+                            <h5 class="card-title">Mi Carrito</h5>
 
                             <div class="table-responsive">
                                 <table id="example" class="table text-nowrap align-middle mb-0">
                                     <thead>
                                         <tr class="border-2 border-bottom border-primary border-0">
-                                            <th scope="col">#</th>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Precio</th>
+                                            <th scope="col">Producto</th>
                                             <th scope="col">Cantidad</th>
-                                            <th scope="col">Imagen</th>
+                                            <th scope="col">Precio Unitario</th>
+                                            <th scope="col">Total</th>
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-group-divider">
 
                                         <?php
-                                            $datos = ConsultarProductos();
+                                            $datos = ConsultarCarrito();
                                             While($fila = mysqli_fetch_array($datos))
                                             {
                                                 echo "<tr>";
-                                                echo "<td>" . $fila["Consecutivo"] . "</td>";
-                                                echo "<td title='" . $fila["Descripcion"] . "'>" . $fila["Nombre"] . "</td>";
-                                                echo "<td>¢ " . number_format($fila["Precio"],2) . "</td>";
-                                                echo "<td>" . $fila["Cantidad"] . "</td>";
-                                                echo "<td><img width='125' height='100' src='" . $fila["Imagen"] . "'></img></td>";
+                                                echo "<td>" . $fila["ConsecutivoProducto"] . ' - '. $fila["Nombre"] . "</td>";
+                                                echo "<td>" . $fila["CantidadDeseada"] . "</td>";
+                                                echo "<td>¢ " . number_format($fila["TotalUnitario"],2) . "</td>";
+                                                echo "<td>¢ " . number_format($fila["Total"],2) . "</td>";
                                                 echo '<td>
 
-                                                        <a href="actualizarProducto.php?id=' . $fila["Consecutivo"] . '" class="btn">
-                                                            <i class="fa fa-edit" style="color:blue; font-size: 1.6em;"></i>
-                                                        </a>
+                                                    <button id="btnOpenModal" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                                        data-id=' . $fila["ConsecutivoProducto"] . ' data-name="' . $fila["Nombre"] . '">
+                                                        <i class="fa fa-trash" style="color:red; font-size: 1.6em;"></i>
+                                                    </button>
 
-                                                      </td>';
+                                                    </td>';
                                                 echo "</tr>";   
                                             }
                                         ?>
@@ -91,7 +80,7 @@
     <?php
         ReferenciasJS();
     ?>
-    <script src="../js/ConsultarProductos.js"></script>
+    <script src="../js/ConsultarCarrito.js"></script>
 
 </body>
 
