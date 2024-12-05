@@ -69,6 +69,26 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <br/><br/>
+
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <p style="font-size:14pt; margin-top:2%;">El monto total a cancelar es: <b>¢ <?php echo number_format($_SESSION["TotalCarrito"],2) ?></b></p>
+                                </div>
+                                <div class="col-lg-7">
+
+                                    <?php 
+                                        if($_SESSION["TotalCarrito"] != "0")
+                                        {
+                                            echo '<button type="submit" class="btn btn-outline-primary" style="width:200px">
+                                                Pagar
+                                            </button>';
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
 
@@ -81,6 +101,31 @@
         ReferenciasJS();
     ?>
     <script src="../js/ConsultarCarrito.js"></script>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 700px;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Confirmación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <form action="" method="POST">
+                    <div class="modal-body">
+                    
+                        <input type="hidden" id="txtConsecutivoProducto" name="txtConsecutivoProducto">
+                        ¿Desea cambiar el estado del usuario <label id="lblNombreProducto"></label> ?
+
+                    </div>
+                    <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Procesar"
+                        id="btnRemoverProductoCarrito" name="btnRemoverProductoCarrito">
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
 
 </body>
 

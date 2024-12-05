@@ -1,8 +1,14 @@
 <?php
     include_once $_SERVER["DOCUMENT_ROOT"] . '/Controller/LoginController.php';
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Controller/CarritoController.php';
 
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
+    }
+
+    if(isset($_SESSION["NombreUsuario"]))
+    {
+        ConsultarResumenCarrito();
     }
 
     function MostrarMenu()
@@ -64,6 +70,15 @@
                                             </span>
                                             <span class="hide-menu">Mi Carrito</span>
                                         </a>
+                                    </li>
+                                     <li class="sidebar-item">
+                                        <a class="sidebar-link" href="../Carrito/consultarCompras.php" aria-expanded="false">
+                                            <span>
+                                                <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
+                                                </iconify-icon>
+                                            </span>
+                                            <span class="hide-menu">Mis Compras</span>
+                                        </a>
                                     </li>';
                             }
 
@@ -81,6 +96,8 @@
         if(isset($_SESSION["NombreUsuario"]))
         {
             $usuario = $_SESSION["NombreUsuario"];
+            $cantidad = $_SESSION["CantidadCarrito"];
+            $total = $_SESSION["TotalCarrito"];
         }
 
         echo '
@@ -94,6 +111,10 @@
                             </a>
                         </li>
                     </ul>
+
+                    <i class="fa fa-tags" style="margin-right:10px;"></i>'. $cantidad .'
+                    <i class="fa fa-credit-card" style="margin-left:10px; margin-right:10px;"></i>¢ '. number_format($total,2) .'
+
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                         ' . $usuario . '

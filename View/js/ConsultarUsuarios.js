@@ -13,5 +13,4 @@ $(document).on("click", "#btnOpenModal", function(){
 
     $("#txtConsecutivo").val($(this).attr('data-id'));
     $("#lblNombre").text($(this).attr('data-name'));
-
 });

@@ -8,3 +8,9 @@ $(document).ready(function() {
     });
 
 });
+
+$(document).on("click", "#btnOpenModal", function(){
+
+    $("#txtConsecutivoProducto").val($(this).attr('data-id'));
+    $("#lblNombreProducto").text($(this).attr('data-name'));
+});
