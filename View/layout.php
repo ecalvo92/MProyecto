@@ -72,7 +72,7 @@
                                         </a>
                                     </li>
                                      <li class="sidebar-item">
-                                        <a class="sidebar-link" href="../Carrito/consultarCompras.php" aria-expanded="false">
+                                        <a class="sidebar-link" href="../Carrito/consultarFacturas.php" aria-expanded="false">
                                             <span>
                                                 <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
                                                 </iconify-icon>
@@ -93,6 +93,8 @@
     function MostrarHeader()
     {
         $usuario = "Invitado";
+        $cantidad = "0";
+        $total = "0";
         if(isset($_SESSION["NombreUsuario"]))
         {
             $usuario = $_SESSION["NombreUsuario"];

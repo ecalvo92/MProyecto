@@ -77,15 +77,16 @@
                                     <p style="font-size:14pt; margin-top:2%;">El monto total a cancelar es: <b>¢ <?php echo number_format($_SESSION["TotalCarrito"],2) ?></b></p>
                                 </div>
                                 <div class="col-lg-7">
-
-                                    <?php 
-                                        if($_SESSION["TotalCarrito"] != "0")
-                                        {
-                                            echo '<button type="submit" class="btn btn-outline-primary" style="width:200px">
-                                                Pagar
-                                            </button>';
-                                        }
-                                    ?>
+                                    <form action="" method="POST">
+                                        <?php 
+                                            if($_SESSION["TotalCarrito"] != "0")
+                                            {
+                                                echo '<button type="submit" id="btnPagarCarrito" name="btnPagarCarrito" class="btn btn-outline-primary" style="width:200px">
+                                                    Pagar
+                                                </button>';
+                                            }
+                                        ?>
+                                    </form>
                                 </div>
                             </div>
                             

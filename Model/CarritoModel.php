@@ -74,4 +74,59 @@
         }
     }
 
+    function PagarCarritoModel($consecutivoUsuario)
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL PagarCarrito('$consecutivoUsuario')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return false;
+        }
+    }
+
+    function ConsultarFacturasModel($consecutivo)
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL ConsultarFacturas('$consecutivo')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return null;
+        }
+    }
+
+    function ConsultarDetalleFacturaModel($id)
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL ConsultarDetalleFactura('$id')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return null;
+        }
+    }
+    
+
 ?>

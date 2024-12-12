@@ -56,16 +56,28 @@
 
                                             if(isset($_SESSION["NombreUsuario"]))
                                             {
-                                                echo 
-                                                '<div class="row">
-                                                    <div class="col-6">
-                                                        <input id='. $fila["Consecutivo"] . ' type="number" class="form-control" style="text-align:center" 
-                                                        onkeypress="return SoloNumeros(event)" value="0" min="1" max=' . $fila["Cantidad"] . '>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <a onclick="RegistrarCarritoJS(' . $fila["Consecutivo"] .', ' . $fila["Cantidad"] .');" style="width:100%" class="btn btn-primary">+ Añadir</a>
-                                                    </div>
-                                                </div>';                                             
+                                                if($fila["Cantidad"] > 0)
+                                                {
+                                                    echo 
+                                                    '<div class="row">
+                                                        <div class="col-6">
+                                                            <input id='. $fila["Consecutivo"] . ' type="number" class="form-control" style="text-align:center" 
+                                                            onkeypress="return false;" value="0" min="1" max=' . $fila["Cantidad"] . '>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <a onclick="RegistrarCarritoJS(' . $fila["Consecutivo"] .', ' . $fila["Cantidad"] .');" style="width:100%" class="btn btn-primary">+ Añadir</a>
+                                                        </div>
+                                                    </div>';     
+                                                }   
+                                                else
+                                                {
+                                                    echo 
+                                                    '<div class="row">
+                                                        <div class="col-12 text-center">
+                                                            <p style="color:red; font-weight:bold;">AGOTADO</p>
+                                                        </div>
+                                                    </div>';  
+                                                }                                     
                                             }
 
                                             echo '</div>

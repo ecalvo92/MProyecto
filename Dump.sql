@@ -35,7 +35,7 @@ CREATE TABLE `tcarrito` (
   KEY `FK_Producto` (`ConsecutivoProducto`),
   CONSTRAINT `FK_Producto` FOREIGN KEY (`ConsecutivoProducto`) REFERENCES `tproducto` (`Consecutivo`),
   CONSTRAINT `FK_Usuario` FOREIGN KEY (`ConsecutivoUsuario`) REFERENCES `tusuario` (`Consecutivo`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,6 @@ CREATE TABLE `tcarrito` (
 
 LOCK TABLES `tcarrito` WRITE;
 /*!40000 ALTER TABLE `tcarrito` DISABLE KEYS */;
-INSERT INTO `tcarrito` VALUES (8,2,21,2,'2024-12-04 20:34:32');
 /*!40000 ALTER TABLE `tcarrito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +66,7 @@ CREATE TABLE `tdetalle` (
   KEY `FK_DetalleProducto` (`ConsecutivoProducto`),
   CONSTRAINT `FK_DetalleMaestro` FOREIGN KEY (`ConsecutivoMaestro`) REFERENCES `tmaestro` (`Consecutivo`),
   CONSTRAINT `FK_DetalleProducto` FOREIGN KEY (`ConsecutivoProducto`) REFERENCES `tproducto` (`Consecutivo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,6 +75,7 @@ CREATE TABLE `tdetalle` (
 
 LOCK TABLES `tdetalle` WRITE;
 /*!40000 ALTER TABLE `tdetalle` DISABLE KEYS */;
+INSERT INTO `tdetalle` VALUES (7,3,2,8,12500.00,100000.00),(8,3,3,5,4200.00,21000.00),(10,4,2,9,12500.00,112500.00),(11,5,2,1,12500.00,12500.00);
 /*!40000 ALTER TABLE `tdetalle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `tmaestro` (
   PRIMARY KEY (`Consecutivo`),
   KEY `FK_MaestroUsuario` (`ConsecutivoUsuario`),
   CONSTRAINT `FK_MaestroUsuario` FOREIGN KEY (`ConsecutivoUsuario`) REFERENCES `tusuario` (`Consecutivo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,6 +103,7 @@ CREATE TABLE `tmaestro` (
 
 LOCK TABLES `tmaestro` WRITE;
 /*!40000 ALTER TABLE `tmaestro` DISABLE KEYS */;
+INSERT INTO `tmaestro` VALUES (3,'2024-12-11 18:55:18',20,121000.00),(4,'2024-12-11 19:02:07',20,112500.00),(5,'2024-12-11 19:03:36',21,12500.00);
 /*!40000 ALTER TABLE `tmaestro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,7 +131,7 @@ CREATE TABLE `tproducto` (
 
 LOCK TABLES `tproducto` WRITE;
 /*!40000 ALTER TABLE `tproducto` DISABLE KEYS */;
-INSERT INTO `tproducto` VALUES (2,'Sustagen de Vainillla','Es un alimento en polvo que ofrece un equilibrio de nutrientes para complementar la dieta habitual de niños, deportistas y personas debilitadas.',12500.00,8,'/View/products_images/2.jpg'),(3,'Chocoleche','Chocoleche es una combinación de leche 100% pura de vaca y cremoso chocolate, es un producto de la Cooperativa de Productores de Leche Dos Pinos.',4200.00,5,'/View/products_images/R.jpg');
+INSERT INTO `tproducto` VALUES (2,'Sustagen de Vainillla','Es un alimento en polvo que ofrece un equilibrio de nutrientes para complementar la dieta habitual de niños, deportistas y personas debilitadas.',12500.00,0,'/View/products_images/2.jpg'),(3,'Chocoleche','Chocoleche es una combinación de leche 100% pura de vaca y cremoso chocolate, es un producto de la Cooperativa de Productores de Leche Dos Pinos.',4200.00,0,'/View/products_images/R.jpg');
 /*!40000 ALTER TABLE `tproducto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,6 +340,61 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarDetalleFactura` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarDetalleFactura`(pConsecutivo bigint)
+BEGIN
+
+	SELECT	D.ConsecutivoProducto,
+			P.Nombre,
+            D.Cantidad,
+            D.Precio,
+            D.Total    
+	FROM 	cursobd.tDetalle D
+    INNER JOIN cursobd.tProducto P ON P.Consecutivo = D.ConsecutivoProducto
+    WHERE 	D.ConsecutivoMaestro = pConsecutivo;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ConsultarFacturas` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultarFacturas`(pConsecutivo bigint)
+BEGIN
+
+	SELECT	M.Consecutivo,
+			M.Fecha,
+            U.Nombre,
+            M.Total
+	FROM 	cursobd.tMaestro M
+    INNER 	JOIN cursobd.tUsuario U ON M.ConsecutivoUsuario = U.Consecutivo
+    WHERE 	ConsecutivoUsuario = pConsecutivo;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `ConsultarProducto` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -535,6 +591,55 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `PagarCarrito` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PagarCarrito`(pConsecutivo bigint)
+BEGIN
+
+	INSERT 	INTO cursobd.tmaestro(Fecha,ConsecutivoUsuario,Total)
+	SELECT 	NOW(),
+			C.ConsecutivoUsuario,
+			IFNULL(SUM(C.CantidadDeseada * P.Precio),0)
+    FROM	tCarrito C
+    INNER JOIN tProducto P ON C.ConsecutivoProducto = P.Consecutivo
+    WHERE	C.ConsecutivoUsuario = pConsecutivo;
+
+
+	INSERT 	INTO cursobd.tdetalle(ConsecutivoMaestro,ConsecutivoProducto,Cantidad,Precio,Total)
+	SELECT	LAST_INSERT_ID(),
+			C.ConsecutivoProducto,
+            IFNULL(C.CantidadDeseada,0),
+            IFNULL(P.Precio,0),
+            IFNULL(C.CantidadDeseada * P.Precio,0)
+    FROM	tCarrito C
+    INNER JOIN tProducto P ON C.ConsecutivoProducto = P.Consecutivo
+    WHERE	C.ConsecutivoUsuario = pConsecutivo;
+
+
+	UPDATE 	tProducto P
+    INNER 	JOIN tCarrito C ON P.Consecutivo = C.ConsecutivoProducto
+	SET 	P.Cantidad = P.Cantidad - C.CantidadDeseada 
+    WHERE	C.ConsecutivoUsuario = pConsecutivo;
+    
+    
+    DELETE	FROM tCarrito
+    WHERE	ConsecutivoUsuario = pConsecutivo;
+    
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `RecuperarAcceso` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -685,4 +790,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-04 20:48:00
+-- Dump completed on 2024-12-11 19:49:08
